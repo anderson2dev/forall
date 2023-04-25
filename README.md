@@ -1,2 +1,5 @@
 # trabalho-engensoft
-Trabalho de engesoft
+## Metodologia ágil utilizada
+Kanban
+## Descrição:
+Fórum de compartilhamento de mensagens
