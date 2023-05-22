@@ -1,4 +1,4 @@
-# trabalho-engensoft
+# forall
 ## Metodologia ágil utilizada
 Kanban - [Jira 🔗]("https://engenforum.atlassian.net/jira")
 ## Linguagem
@@ -7,7 +7,7 @@ Kanban - [Jira 🔗]("https://engenforum.atlassian.net/jira")
 ## Frameworks
 ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
 ## Descrição:
-Fórum de compartilhamento de mensagens
+Fórum de compartilhamento de mensagens. forall - Fórum para todos.
 
 ## Reuniões:
 Google Meet
