@@ -40,3 +40,22 @@ Contatos diários para tirar dúvidas e efetuar ajustes pontuais
 
 ## Como Acessar:
 O link de acesso ao ForAll será sisponibilizado em breve.
+
+## Entregas:
+
+### Entrega 00:
+
+Modelos de processo que será adotado pelo time
+
+### Entrega 01:
+
+Histórias de Usuário
+
+Requisitos do Sistema
+
+### Entrega 02:
+
+Diagramas de Casos de Uso
+
+Diagramas de Classe
+
