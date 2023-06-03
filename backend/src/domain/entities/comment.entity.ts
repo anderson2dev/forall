@@ -5,9 +5,11 @@ export interface ICommentInterface {
   id: string;
   author: User;
   topic: ITopicEntity;
-  comments: Array<ICommentInterface>;
+  referencedComments: Array<ICommentInterface>;
   content: string;
   upvotes: number;
   downvotes: number;
   enabled: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }

@@ -1,10 +1,9 @@
-import { IUserEntity } from './user.entity';
-
 export interface IProfileEntity {
   id: string;
   name: string;
-  birthDate: Date;
+  birthDate: string;
   avatarUrl?: string;
   email: string;
-  user: IUserEntity;
+  createdAt: Date;
+  updatedAt: Date;
 }
