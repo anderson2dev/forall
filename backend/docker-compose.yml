@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "!Idknow6148"
+    ports:
+      - "5432:5432"
+  postgres_admin:
+    image: adminer
+    ports:
+      - "8080:8080"
