@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
+import { join } from 'node:path';
 import { EnvironmentConfigService } from '../environment-config/environment-config.service';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { EnvironmentConfigModule } from '../environment-config/environment-config.module';
 
-export const getTypeOrmModuleOptions = (
+export const getTypeOrmModuleOptions = async (
   config: EnvironmentConfigService,
-): TypeOrmModuleOptions =>
+): Promise<TypeOrmModuleOptions> =>
   ({
     type: 'postgres',
     host: config.getDatabaseHost(),
@@ -14,19 +16,16 @@ export const getTypeOrmModuleOptions = (
     password: config.getDatabasePassword(),
     synchronize: config.getDatabaseSync(),
     schema: config.getDatabaseSchema(),
-    entities: [__dirname.concat('./../../entities/*.{ts|js}')],
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    entities: [join(__dirname, '../../entities/*.{ts|js}')],
   } as TypeOrmModuleOptions);
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
+      imports: [EnvironmentConfigModule],
       inject: [EnvironmentConfigService],
       useFactory: getTypeOrmModuleOptions,
-      imports: [EnvironmentConfigService],
     }),
   ],
 })
-export class TypeormModule {}
+export class TypeOrmConfigModule {}
