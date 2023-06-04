@@ -2,7 +2,8 @@ services:
   postgres:
     image: postgres
     environment:
-      POSTGRES_PASSWORD: "!Idknow6148"
+      POSTGRES_USER: 'foo'
+      POSTGRES_PASSWORD: "bar"
     ports:
       - "5432:5432"
   postgres_admin:
