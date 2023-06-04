@@ -1,4 +1,4 @@
-import { IProfileEntity } from '../../domain/entities/profile.entity';
+import { DomainProfile } from '../../domain/entities/profile.model';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('profiles')
-export class Profile implements IProfileEntity {
+export class Profile extends DomainProfile {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   @Column('string')

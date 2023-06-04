@@ -1,4 +1,4 @@
-import { ITopicEntity } from '../../domain/entities/topic.entity';
+import { DomainTopic } from '../../domain/entities/topic.model';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -12,7 +12,7 @@ import { User } from './user.entity';
 import { Comment } from './comment.entity';
 
 @Entity('topics')
-export class Topic implements ITopicEntity {
+export class Topic extends DomainTopic {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   @Column('string')
