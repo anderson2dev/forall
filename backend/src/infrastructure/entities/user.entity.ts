@@ -17,9 +17,9 @@ import { Comment } from './comment.entity';
 export class User extends DomainUser {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column('string')
+  @Column('varchar')
   login: string;
-  @Column('string')
+  @Column('varchar')
   password: string;
   @OneToOne(() => Profile)
   @JoinColumn()

@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User as ServiceUser } from '../entities/user.entity';
+import { User } from '../entities/user.entity';
 import { DomainUser } from '../../domain/entities/user.model';
 import { UserRepository } from '../../domain/repository/user.type';
 
 @Injectable()
 export class DatabaseUserRepository implements UserRepository {
   constructor(
-    @InjectRepository(ServiceUser)
-    private readonly userEntityRepository: Repository<ServiceUser>,
+    @InjectRepository(User)
+    private readonly userEntityRepository: Repository<User>,
   ) {}
 
   async findOne(id: string): Promise<DomainUser> {
@@ -21,7 +21,7 @@ export class DatabaseUserRepository implements UserRepository {
   }
 
   async insert(entity: DomainUser): Promise<void> {
-    await this.userEntityRepository.insert(this.toServiceUser(entity));
+    await this.userEntityRepository.insert(this.toUser(entity));
   }
 
   async update(id: string, updateObj: Partial<DomainUser>): Promise<void> {
@@ -41,11 +41,11 @@ export class DatabaseUserRepository implements UserRepository {
     return users.map(this.toDomainUser);
   }
 
-  private toDomainUser(user: ServiceUser): NonNullable<Partial<DomainUser>> {
+  private toDomainUser(user: User): NonNullable<Partial<DomainUser>> {
     return { ...user } as DomainUser;
   }
 
-  private toServiceUser(user: ServiceUser): NonNullable<Partial<ServiceUser>> {
-    return { ...user } as ServiceUser;
+  private toUser(user: User): NonNullable<Partial<User>> {
+    return { ...user } as User;
   }
 }

@@ -22,9 +22,9 @@ export class Comment extends DomainComment {
   referencedComments: Comment[];
   @Column('text')
   content: string;
-  @Column('number')
+  @Column('integer')
   upvotes: number;
-  @Column('number')
+  @Column('integer')
   downvotes: number;
   @Column('bool')
   enabled: boolean;

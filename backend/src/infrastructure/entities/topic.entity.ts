@@ -15,7 +15,7 @@ import { Comment } from './comment.entity';
 export class Topic extends DomainTopic {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column('string')
+  @Column('varchar')
   title: string;
   @Column('text')
   description: string;
@@ -27,9 +27,9 @@ export class Topic extends DomainTopic {
   createdAt: Date;
   @UpdateDateColumn()
   updatedAt: Date;
-  @Column('number')
+  @Column('integer')
   upvotes: number;
-  @Column('number')
+  @Column('integer')
   downvotes: number;
   @Column('boolean')
   enabled: boolean;

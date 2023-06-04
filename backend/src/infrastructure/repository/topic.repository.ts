@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsSelect, Repository } from 'typeorm';
 import { Topic } from '../entities/topic.entity';
 import { DomainTopic } from '../../domain/entities/topic.model';
+import { Injectable } from '@nestjs/common';
 import { TopicRepository } from '../../domain/repository/topic.type';
 
 @Injectable()
