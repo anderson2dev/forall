@@ -1,4 +1,4 @@
-import { ITopicEntity } from '../../domain/entities/topic.entity';
+import { DomainTopic } from '../../domain/entities/topic.model';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -12,10 +12,10 @@ import { User } from './user.entity';
 import { Comment } from './comment.entity';
 
 @Entity('topics')
-export class Topic implements ITopicEntity {
+export class Topic extends DomainTopic {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column('string')
+  @Column('varchar')
   title: string;
   @Column('text')
   description: string;
@@ -27,9 +27,9 @@ export class Topic implements ITopicEntity {
   createdAt: Date;
   @UpdateDateColumn()
   updatedAt: Date;
-  @Column('number')
+  @Column('integer')
   upvotes: number;
-  @Column('number')
+  @Column('integer')
   downvotes: number;
   @Column('boolean')
   enabled: boolean;

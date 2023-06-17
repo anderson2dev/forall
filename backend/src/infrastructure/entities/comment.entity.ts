@@ -1,4 +1,4 @@
-import { ICommentInterface } from '../../domain/entities/comment.entity';
+import { DomainComment } from '../../domain/entities/comment.model';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -11,7 +11,7 @@ import { User } from './user.entity';
 import { Topic } from './topic.entity';
 
 @Entity('comments')
-export class Comment implements ICommentInterface {
+export class Comment extends DomainComment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   @ManyToOne(() => User, (user) => user.comments)
@@ -22,9 +22,9 @@ export class Comment implements ICommentInterface {
   referencedComments: Comment[];
   @Column('text')
   content: string;
-  @Column('number')
+  @Column('integer')
   upvotes: number;
-  @Column('number')
+  @Column('integer')
   downvotes: number;
   @Column('bool')
   enabled: boolean;

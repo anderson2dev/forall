@@ -8,18 +8,18 @@ import {
   JoinColumn,
   OneToMany,
 } from 'typeorm';
-import { IUserEntity } from '../../domain/entities/user.entity';
+import { DomainUser } from '../../domain/entities/user.model';
 import { Profile } from './profile.entity';
 import { Topic } from './topic.entity';
 import { Comment } from './comment.entity';
 
 @Entity('users')
-export class User implements IUserEntity {
+export class User extends DomainUser {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column('string')
+  @Column('varchar')
   login: string;
-  @Column('string')
+  @Column('varchar')
   password: string;
   @OneToOne(() => Profile)
   @JoinColumn()
