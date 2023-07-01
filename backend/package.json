@@ -4,9 +4,12 @@
    "description": "",
    "author": "",
    "private": true,
+   "type": "commonjs",
    "license": "UNLICENSED",
    "scripts": {
       "build": "nest build",
+      "migration:create": "typeorm  migration:create -d src/infrastructure/database/migrations/ -n",
+      "typeorm:run-migrations": "npm run typeorm migration:run -- -d ./src/infrastructure/config/typeorm/typeOrm.config.ts",
       "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
       "start": "ts-node src/index.ts",
       "start:dev": "nest start --debug --watch",
@@ -18,7 +21,7 @@
       "test:cov": "jest --coverage",
       "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
       "test:e2e": "jest --config ./test/jest-e2e.json",
-      "typeorm": "typeorm-ts-node-commonjs"
+      "typeorm": "ts-node ./node_modules/typeorm/cli"
    },
    "dependencies": {
       "@nestjs/common": "^9.0.0",
