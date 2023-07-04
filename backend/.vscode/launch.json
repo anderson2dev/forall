@@ -11,6 +11,18 @@
       "internalConsoleOptions": "neverOpen",
       "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
-    }
+    },
+    {
+      "name": "Run Migrations",
+      "type": "node",
+      "request": "launch",
+      "args": ["typeorm", "migration:run"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+    },
+
   ]
 }
