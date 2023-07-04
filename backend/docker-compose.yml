@@ -4,9 +4,22 @@ services:
     environment:
       POSTGRES_USER: 'foo'
       POSTGRES_PASSWORD: "bar"
+      POSTGRES_DB: "for_all"
     ports:
       - "5432:5432"
+    networks:
+      - pg-compose-network
   postgres_admin:
-    image: adminer
+    image: dpage/pgadmin4
     ports:
-      - "8080:8080"
+      - "16453:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "foo@bar.com"
+      PGADMIN_DEFAULT_PASSWORD: "bar"
+    depends_on:
+     - postgres
+    networks:
+      - pg-compose-network
+networks:
+    pg-compose-network:
+      driver: bridge
