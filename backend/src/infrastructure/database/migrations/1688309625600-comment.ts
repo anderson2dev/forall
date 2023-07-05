@@ -35,29 +35,29 @@ export class Comment1688309625600 implements MigrationInterface {
             { name: 'content', type: 'text', isNullable: false },
             { name: 'upvotes', type: 'int', isNullable: false, default: 0 },
             { name: 'downvotes', type: 'int', isNullable: false, default: 0 },
-            { name: 'created_at', type: 'timestamp', default: 'now()' },
-            { name: 'updated_at', type: 'timestamp', default: 'now()' },
+            { name: 'createdAt', type: 'timestamp', default: 'now()' },
+            { name: 'updatedAt', type: 'timestamp', default: 'now()' },
             { name: 'enabled', type: 'boolean', default: true },
-            { name: 'author_id', type: 'uuid', isNullable: false },
-            { name: 'topic_id', type: 'uuid', isNullable: false },
-            { name: 'referenced_comment_id', type: 'uuid', isNullable: true },
+            { name: 'authorId', type: 'uuid', isNullable: false },
+            { name: 'topicId', type: 'uuid', isNullable: false },
+            { name: 'referencedCommentId', type: 'uuid', isNullable: true },
           ],
           foreignKeys: [
             {
               name: 'FKCommentAuthor',
-              columnNames: ['author_id'],
+              columnNames: ['authorId'],
               referencedTableName: 'users',
               referencedColumnNames: ['id'],
             },
             {
               name: 'FKCommentTopic',
-              columnNames: ['topic_id'],
+              columnNames: ['topicId'],
               referencedTableName: 'topics',
               referencedColumnNames: ['id'],
             },
             {
               name: 'FKCommentReferencedComment',
-              columnNames: ['referenced_comment_id'],
+              columnNames: ['referencedCommentId'],
               referencedTableName: 'comments',
               referencedColumnNames: ['id'],
             },
@@ -68,7 +68,7 @@ export class Comment1688309625600 implements MigrationInterface {
       await queryRunner.addColumn(
         'topics',
         new TableColumn({
-          name: 'comments_id',
+          name: 'commentsId',
           type: 'uuid',
           isNullable: true,
         }),
@@ -78,7 +78,7 @@ export class Comment1688309625600 implements MigrationInterface {
         'topics',
         new TableForeignKey({
           name: 'FKTopicComment',
-          columnNames: ['comments_id'],
+          columnNames: ['commentsId'],
           referencedTableName: 'comments',
           referencedColumnNames: ['id'],
           onDelete: 'CASCADE',
@@ -88,7 +88,7 @@ export class Comment1688309625600 implements MigrationInterface {
       await queryRunner.addColumn(
         'users',
         new TableColumn({
-          name: 'comments_id',
+          name: 'commentsId',
           type: 'uuid',
           isNullable: true,
         }),
@@ -98,7 +98,7 @@ export class Comment1688309625600 implements MigrationInterface {
         'users',
         new TableForeignKey({
           name: 'FKUserComment',
-          columnNames: ['comments_id'],
+          columnNames: ['commentsId'],
           referencedTableName: 'comments',
           referencedColumnNames: ['id'],
           onDelete: 'CASCADE',
@@ -112,7 +112,7 @@ export class Comment1688309625600 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     try {
       await queryRunner.dropTable('comments');
-      await queryRunner.dropColumn('topics', 'comments_id');
+      await queryRunner.dropColumn('topics', 'commentsId');
     } catch (error) {
       console.error(error);
     }

@@ -2,10 +2,6 @@ type genericDomainEntity = {
   id: string;
 };
 
-/*
-TODO: create an type for select which is compatible with FindOptionsSelectProperty from typeorm but could also be used interchangeble
- */
-
 export interface IGenericDomainRepository<T extends genericDomainEntity> {
   findAll(
     queryObj?: Omit<NonNullable<Partial<T>>, 'id'>,

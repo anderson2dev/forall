@@ -36,15 +36,15 @@ export class Topic1688308240595 implements MigrationInterface {
             { name: 'downvotes', type: 'int', isNullable: false, default: 0 },
             { name: 'title', type: 'varchar', isNullable: false },
             { name: 'description', type: 'text', isNullable: false },
-            { name: 'created_at', type: 'timestamp', default: 'now()' },
-            { name: 'updated_at', type: 'timestamp', default: 'now()' },
+            { name: 'createdAt', type: 'timestamp', default: 'now()' },
+            { name: 'updatedAt', type: 'timestamp', default: 'now()' },
             { name: 'enabled', type: 'boolean', default: true },
-            { name: 'author_id', type: 'uuid', isNullable: false },
+            { name: 'authorId', type: 'uuid', isNullable: false },
           ],
           foreignKeys: [
             {
               name: 'FKTopicAuthor',
-              columnNames: ['author_id'],
+              columnNames: ['authorId'],
               referencedTableName: 'users',
               referencedColumnNames: ['id'],
             },
@@ -55,7 +55,7 @@ export class Topic1688308240595 implements MigrationInterface {
       await queryRunner.addColumn(
         'users',
         new TableColumn({
-          name: 'topics_id',
+          name: 'topicsId',
           type: 'uuid',
           isNullable: true,
         }),
@@ -65,7 +65,7 @@ export class Topic1688308240595 implements MigrationInterface {
         'users',
         new TableForeignKey({
           name: 'FKUserTopic',
-          columnNames: ['topics_id'],
+          columnNames: ['topicsId'],
           referencedTableName: 'topics',
           referencedColumnNames: ['id'],
           onDelete: 'CASCADE',
@@ -79,7 +79,7 @@ export class Topic1688308240595 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     try {
       await queryRunner.dropTable('topics');
-      await queryRunner.dropColumn('users', 'topics_id');
+      await queryRunner.dropColumn('users', 'topicsId');
     } catch (error) {
       console.error(error);
     }

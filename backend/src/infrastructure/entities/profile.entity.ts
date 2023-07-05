@@ -15,7 +15,7 @@ export class Profile extends DomainProfile {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   @OneToOne(() => Image)
-  avatar: Image;
+  avatar?: Image;
   @Column('timetz')
   birthDate: string;
   @Column('varchar')

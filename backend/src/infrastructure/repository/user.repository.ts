@@ -41,11 +41,11 @@ export class DatabaseUserRepository implements UserRepository {
     return users.map(this.toDomainUser);
   }
 
-  private toDomainUser(user: User): NonNullable<Partial<DomainUser>> {
+  private toDomainUser(user: User): Partial<DomainUser> {
     return { ...user } as DomainUser;
   }
 
-  private toUser(user: User): NonNullable<Partial<User>> {
+  private toUser(user: User): Partial<User> {
     return { ...user } as User;
   }
 }

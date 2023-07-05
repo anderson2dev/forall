@@ -5,6 +5,11 @@ import { Profile1688305694921 } from '../../database/migrations/1688305694921-pr
 import { User1688307556570 } from '../../database/migrations/1688307556570-user';
 import { Topic1688308240595 } from '../../database/migrations/1688308240595-topic';
 import { Comment1688309625600 } from '../../database/migrations/1688309625600-comment';
+import { User } from '../../entities/user.entity';
+import { Topic } from '../../entities/topic.entity';
+import { Comment } from '../../entities/comment.entity';
+import { Profile } from '../../entities/profile.entity';
+import { Image } from '../../entities/image.entity';
 
 dotenv.config();
 
@@ -15,9 +20,7 @@ const config: DataSourceOptions = {
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
-  entities: [
-    __dirname + '/../infrastructure/database/entities/*.entity{.ts,.js}',
-  ],
+  entities: [User, Topic, Comment, Profile, Image],
   migrations: [
     Images1688186942928,
     Profile1688305694921,

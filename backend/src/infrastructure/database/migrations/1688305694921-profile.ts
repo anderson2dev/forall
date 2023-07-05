@@ -34,17 +34,17 @@ export class Profile1688305694921 implements MigrationInterface {
               isNullable: false,
             },
             {
-              name: 'birth_date',
+              name: 'birthDate',
               type: 'date',
               isNullable: false,
             },
             {
-              name: 'created_at',
+              name: 'createdAt',
               type: 'timestamp',
               default: 'now()',
             },
             {
-              name: 'updated_at',
+              name: 'updatedAt',
               type: 'timestamp',
               default: 'now()',
             },
@@ -54,7 +54,7 @@ export class Profile1688305694921 implements MigrationInterface {
               default: true,
             },
             {
-              name: 'avatar_id',
+              name: 'avatarId',
               type: 'uuid',
               isNullable: true,
             },
@@ -62,7 +62,7 @@ export class Profile1688305694921 implements MigrationInterface {
           foreignKeys: [
             {
               name: 'FKProfileImage',
-              columnNames: ['avatar_id'],
+              columnNames: ['avatarId'],
               referencedTableName: 'images',
               referencedColumnNames: ['id'],
               onDelete: 'CASCADE',
