@@ -12,7 +12,7 @@ export class CreateTopicUseCase {
     const topic = new DomainTopic();
     topic.title = generatedTopic.title;
     topic.description = generatedTopic.description;
-    const author = await this.userRepository.findOne(generatedTopic.author);
+    topic.author = generatedTopic.author;
     topic.comments = [];
     topic.createdAt = new Date();
     topic.updatedAt = new Date();
