@@ -16,8 +16,8 @@ export class Image extends DomainImage {
   url: string;
   @Column('bool')
   enabled: boolean;
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt: Date;
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt: Date;
 }

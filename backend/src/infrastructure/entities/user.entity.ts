@@ -28,9 +28,9 @@ export class User extends DomainUser {
   createdTopics: Topic[];
   @OneToMany(() => Comment, (comment) => comment.author)
   comments: Comment[];
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt: Date;
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt: Date;
   @Column('boolean')
   enabled: boolean;

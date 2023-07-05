@@ -20,9 +20,9 @@ export class Profile extends DomainProfile {
   birthDate: string;
   @Column('varchar')
   email: string;
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt: Date;
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt: Date;
   @Column('varchar')
   name: string;

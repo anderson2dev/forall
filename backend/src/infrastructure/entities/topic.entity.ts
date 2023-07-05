@@ -23,9 +23,9 @@ export class Topic extends DomainTopic {
   author: User;
   @OneToMany(() => Comment, (comment) => comment.topic)
   comments: Comment[];
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt: Date;
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt: Date;
   @Column('integer')
   upvotes: number;
