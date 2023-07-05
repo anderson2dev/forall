@@ -3,11 +3,7 @@ type genericDomainEntity = {
 };
 
 export interface IGenericDomainRepository<T extends genericDomainEntity> {
-  findAll(
-    queryObj?: Omit<NonNullable<Partial<T>>, 'id'>,
-    select?: any,
-    size?: number,
-  ): Promise<T[] | NonNullable<Partial<T>>[]>;
+  findAll(): Promise<T[]>;
   findOne(id: string): Promise<T | NonNullable<Partial<T>>>;
   delete(id: string): Promise<void>;
   update(id: string, updateObj: NonNullable<Partial<T>>): Promise<void>;

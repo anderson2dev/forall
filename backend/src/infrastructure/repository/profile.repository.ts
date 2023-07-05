@@ -16,7 +16,7 @@ export class DatabaseProfileRepository implements ProfileRepository {
     queryObj?: Omit<Partial<DomainProfile>, 'id'>,
     select?: any,
     size?: number,
-  ): Promise<NonNullable<Partial<DomainProfile>>[]> {
+  ): Promise<DomainProfile[]> {
     const profiles = await this.profileEntityRepository.find({
       where: queryObj,
       select,
@@ -26,9 +26,7 @@ export class DatabaseProfileRepository implements ProfileRepository {
     return profiles.map(this.toDomainProfile);
   }
 
-  async findOne(
-    id: string,
-  ): Promise<DomainProfile | NonNullable<Partial<DomainProfile>>> {
+  async findOne(id: string): Promise<DomainProfile> {
     const profile = await this.profileEntityRepository.findOne({
       where: { id },
     });
@@ -47,15 +45,11 @@ export class DatabaseProfileRepository implements ProfileRepository {
     await this.profileEntityRepository.delete(id);
   }
 
-  private toDomainProfile(
-    profile: ServiceProfile,
-  ): DomainProfile | NonNullable<Partial<DomainProfile>> {
-    return { ...profile };
+  private toDomainProfile(profile: ServiceProfile): DomainProfile {
+    return { ...profile } as DomainProfile;
   }
 
-  private toServiceProfile(
-    profile: DomainProfile,
-  ): ServiceProfile | NonNullable<Partial<ServiceProfile>> {
-    return { ...profile };
+  private toServiceProfile(profile: DomainProfile): ServiceProfile {
+    return { ...profile } as ServiceProfile;
   }
 }

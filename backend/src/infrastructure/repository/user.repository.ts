@@ -32,20 +32,20 @@ export class DatabaseUserRepository implements UserRepository {
     queryObj?: Omit<Partial<DomainUser>, 'id'>,
     select?: any,
     size?: number,
-  ): Promise<DomainUser[] | NonNullable<Partial<DomainUser>>[]> {
+  ): Promise<DomainUser[]> {
     const users = await this.userEntityRepository.find({
       where: queryObj,
       select,
       take: size,
     });
-    return users.map(this.toDomainUser);
+    return users?.map(this.toDomainUser) ?? [];
   }
 
-  private toDomainUser(user: User): Partial<DomainUser> {
+  private toDomainUser(user: User): DomainUser {
     return { ...user } as DomainUser;
   }
 
-  private toUser(user: User): Partial<User> {
+  private toUser(user: User): User {
     return { ...user } as User;
   }
 }

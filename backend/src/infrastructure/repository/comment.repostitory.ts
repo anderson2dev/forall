@@ -16,7 +16,7 @@ export class DatabaseCommentRepository implements CommentRepository {
     queryObj?: Omit<Partial<DomainComment>, 'id'>,
     select?: any,
     size?: number,
-  ): Promise<NonNullable<Partial<DomainComment>>[]> {
+  ): Promise<DomainComment[]> {
     const profiles = await this.profileEntityRepository.find({
       where: queryObj,
       select,
@@ -47,15 +47,11 @@ export class DatabaseCommentRepository implements CommentRepository {
     await this.profileEntityRepository.delete(id);
   }
 
-  private toDomainComment(
-    profile: ServiceComment,
-  ): DomainComment | NonNullable<Partial<DomainComment>> {
-    return { ...profile };
+  private toDomainComment(profile: ServiceComment): DomainComment {
+    return { ...profile } as DomainComment;
   }
 
-  private toServiceComment(
-    profile: DomainComment,
-  ): ServiceComment | NonNullable<Partial<ServiceComment>> {
-    return { ...profile };
+  private toServiceComment(profile: DomainComment): ServiceComment {
+    return { ...profile } as ServiceComment;
   }
 }

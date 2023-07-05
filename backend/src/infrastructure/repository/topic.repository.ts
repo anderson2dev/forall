@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsSelect, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Topic } from '../entities/topic.entity';
 import { DomainTopic } from '../../domain/entities/topic.model';
 import { Injectable } from '@nestjs/common';
@@ -20,17 +20,9 @@ export class DatabaseTopicRepository implements TopicRepository {
     });
   }
 
-  async findAll(
-    queryObj?: Omit<Partial<DomainTopic>, 'id'>,
-    select?: any,
-    size?: number,
-  ): Promise<DomainTopic[] | Partial<DomainTopic>[]> {
-    const topics = await this.topicEntityRepository.find({
-      where: queryObj,
-      select: select as FindOptionsSelect<Topic>,
-      take: size,
-    });
-    return topics.map(this.toDomainTopic);
+  async findAll(): Promise<DomainTopic[]> {
+    const topics = await this.topicEntityRepository.find();
+    return topics?.map(this.toDomainTopic) ?? [];
   }
 
   async update(id: string, updateObj: Partial<DomainTopic>): Promise<void> {
