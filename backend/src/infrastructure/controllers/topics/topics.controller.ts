@@ -4,7 +4,7 @@ import {
   Delete,
   Get,
   Inject,
-  ParseIntPipe,
+  Param,
   Post,
   Put,
   Query,
@@ -13,11 +13,13 @@ import { ApiExtraModels, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UseCaseProxy } from '../../use-case-proxy/useCase.proxy';
 import { UsecasesProxyModule } from '../../use-case-proxy/use-case-proxy.module';
 
-import { TopicPresenter } from './topic.presenter';
+import { GetTopicPresenter, TopicPresenter } from './topic.presenter';
 import { ApiResponseType } from '../../commons/swagger/response.decorator';
 
 import { CreateTopicUseCase } from '../../../usecases/topics/createTopic.usecase';
-import { CreateTopicDTO } from './createTopic.dto';
+import { GetTopicsUseCase } from '../../../usecases/topics/getTopics.usecase';
+import { GetTopicUseCase } from '../../../usecases/topics/getTopic.usecase';
+import { CreateTopicDTO } from './topics.dto';
 
 @Controller('topics')
 @ApiTags('topics')
@@ -26,7 +28,11 @@ import { CreateTopicDTO } from './createTopic.dto';
 export class TopicsController {
   constructor(
     @Inject(UsecasesProxyModule.CREATE_TOPIC_USECASE_PROXY)
-    private readonly createTopicUseCase: UseCaseProxy<CreateTopicUseCase>, // @Inject(UsecasesProxyModule.GET_TOPICS_USECASES_PROXY) // private readonly getAllTodoUsecaseProxy: UseCaseProxy<getTodosUseCases>, // @Inject(UsecasesProxyModule.PUT_TOPICS_USECASES_PROXY) // private readonly updateTodoUsecaseProxy: UseCaseProxy<updateTodoUseCases>, // @Inject(UsecasesProxyModule.DELETE_TOPICS_USECASES_PROXY) // private readonly deleteTodoUsecaseProxy: UseCaseProxy<deleteTodoUseCases>, // @Inject(UsecasesProxyModule.POST_TOPICS_USECASES_PROXY) // private readonly addTodoUsecaseProxy: UseCaseProxy<addTodoUseCases>,
+    private readonly createTopicUseCase: UseCaseProxy<CreateTopicUseCase>,
+    @Inject(UsecasesProxyModule.GET_TOPICS_USECASE_PROXY)
+    private readonly getTopicsUseCase: UseCaseProxy<GetTopicsUseCase>,
+    @Inject(UsecasesProxyModule.GET_TOPIC_USECASE_PROXY)
+    private readonly getTopicUseCase: UseCaseProxy<GetTopicUseCase>,
   ) {}
 
   // @Get('todo')
@@ -58,14 +64,30 @@ export class TopicsController {
   //   return 'success';
   // }
 
-  @Post('topics')
+  @Post()
   @ApiResponseType(TopicPresenter, true)
-  async addTodo(@Body() createTopicDTO: CreateTopicDTO) {
+  async createTopic(@Body() createTopicDTO: CreateTopicDTO) {
     await this.createTopicUseCase.getInstance().execute(createTopicDTO);
     return new TopicPresenter({
       author: createTopicDTO.author,
       description: createTopicDTO.description,
       title: createTopicDTO.title,
     });
+  }
+  @Get()
+  @ApiResponseType(TopicPresenter, true)
+  async getTopics() {
+    const topics = await this.getTopicsUseCase.getInstance().execute();
+    return (
+      topics?.map((topic) => {
+        return new GetTopicPresenter(topic);
+      }) ?? []
+    );
+  }
+  @Get(':id')
+  @ApiResponseType(TopicPresenter, true)
+  async getTopic(@Param(':id') id: string) {
+    const topic = await this.getTopicUseCase.getInstance().execute(id);
+    return new GetTopicPresenter(topic);
   }
 }
