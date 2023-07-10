@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CommentRepository } from '../../domain/repository/comment.type';
+import { CommentRepository } from '../../domain/repositories/comment.interface';
 import { Comment as ServiceComment } from '../entities/comment.entity';
 import { DomainComment } from '../../domain/entities/comment.model';
 
@@ -35,16 +35,24 @@ export class DatabaseCommentRepository implements CommentRepository {
     return this.toDomainComment(profile);
   }
 
-  async insert(profile: DomainComment): Promise<void> {
-    await this.profileEntityRepository.insert(this.toServiceComment(profile));
+  async insert(profile: DomainComment): Promise<Partial<DomainComment>> {
+    const result = await this.profileEntityRepository.insert(
+      this.toServiceComment(profile),
+    );
+    return result.raw as Partial<DomainComment>;
   }
 
-  async update(id: string, updateObj: Partial<DomainComment>): Promise<void> {
-    await this.profileEntityRepository.update(id, updateObj);
+  async update(
+    id: string,
+    updateObj: Partial<DomainComment>,
+  ): Promise<Partial<DomainComment>> {
+    const result = await this.profileEntityRepository.update(id, updateObj);
+    return result.raw as Partial<DomainComment>;
   }
 
-  async delete(id: string): Promise<void> {
-    await this.profileEntityRepository.delete(id);
+  async delete(id: string): Promise<Partial<DomainComment>> {
+    const result = await this.profileEntityRepository.delete(id);
+    return result.raw as Partial<DomainComment>;
   }
 
   private toDomainComment(profile: ServiceComment): DomainComment {

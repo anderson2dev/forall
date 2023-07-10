@@ -4,6 +4,7 @@ import {
   NestFastifyApplication,
   FastifyAdapter,
 } from '@nestjs/platform-fastify';
+
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ResponseFormat } from './infrastructure/commons/interceptors/response.interceptor';
 
@@ -12,10 +13,13 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   );
+
+  // set filters
+  app.useGlobalFilters();
   const config = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('Clean Architecture Nestjs')
-    .setDescription('Example with todo list')
+    .setTitle('FOR_ALL API')
+    .setDescription('FOR_ALL API description')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config, {

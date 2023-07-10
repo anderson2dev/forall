@@ -1,5 +1,5 @@
 import { DomainTopic } from '../../domain/entities/topic.model';
-import { TopicRepository } from '../../domain/repository/topic.type';
+import { TopicRepository } from '../../domain/repositories/topic.interface';
 import { ILoggerInterface } from '../../domain/loggers/logger.interface';
 
 export class GetTopicsUseCase {

@@ -7,7 +7,7 @@ import { DatabaseTopicRepository } from '../repository/topic.repository';
 import { UseCaseProxy } from './useCase.proxy';
 import { CreateTopicUseCase } from '../../usecases/topics/createTopic.usecase';
 import { DatabaseUserRepository } from '../repository/user.repository';
-import { UserExceptionsService } from '../commons/exceptions/userExceptions.service';
+import { ExceptionsService } from '../commons/exceptions/exceptions.service';
 import { GetTopicsUseCase } from '../../usecases/topics/getTopics.usecase';
 
 @Module({
@@ -20,6 +20,7 @@ export class UsecasesProxyModule {
   static POST_TOPIC_USECASE_PROXY = 'postTopicUsecaseProxy';
   static DELETE_TOPIC_USECASE_PROXY = 'deleteTopicUsecaseProxy';
   static PUT_TOPIC_USECASE_PROXY = 'putTopicUsecasesProxy';
+  static LOGIN_USECASES_PROXY = 'loginUsecasesProxy';
 
   static register(): DynamicModule {
     return {
@@ -29,21 +30,21 @@ export class UsecasesProxyModule {
           inject: [
             DatabaseTopicRepository,
             DatabaseUserRepository,
-            UserExceptionsService,
+            ExceptionsService,
             LoggerService,
           ],
           provide: UsecasesProxyModule.CREATE_TOPIC_USECASE_PROXY,
           useFactory: (
             topicRepository: DatabaseTopicRepository,
             userRepository: DatabaseUserRepository,
-            userExceptionService: UserExceptionsService,
+            exceptionService: ExceptionsService,
             logger: LoggerService,
           ) =>
             new UseCaseProxy(
               new CreateTopicUseCase(
                 topicRepository,
                 userRepository,
-                userExceptionService,
+                exceptionService,
                 logger,
               ),
             ),

@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { Topic } from '../entities/topic.entity';
 import { DomainTopic } from '../../domain/entities/topic.model';
 import { Injectable } from '@nestjs/common';
-import { TopicRepository } from '../../domain/repository/topic.type';
+import { TopicRepository } from '../../domain/repositories/topic.interface';
 
 @Injectable()
 export class DatabaseTopicRepository implements TopicRepository {
@@ -25,16 +25,24 @@ export class DatabaseTopicRepository implements TopicRepository {
     return topics?.map(this.toDomainTopic) ?? [];
   }
 
-  async update(id: string, updateObj: Partial<DomainTopic>): Promise<void> {
-    await this.topicEntityRepository.update(id, updateObj);
+  async update(
+    id: string,
+    updateObj: Partial<DomainTopic>,
+  ): Promise<Partial<DomainTopic>> {
+    const result = await this.topicEntityRepository.update(id, updateObj);
+    return result.raw as Partial<DomainTopic>;
   }
 
-  async delete(id: string): Promise<void> {
-    await this.topicEntityRepository.delete(id);
+  async delete(id: string): Promise<Partial<DomainTopic>> {
+    const result = await this.topicEntityRepository.delete(id);
+    return result.raw as Partial<DomainTopic>;
   }
 
-  async insert(entity: DomainTopic): Promise<void> {
-    await this.topicEntityRepository.insert(this.toServiceTopic(entity));
+  async insert(entity: DomainTopic): Promise<Partial<DomainTopic>> {
+    const result = await this.topicEntityRepository.insert(
+      this.toServiceTopic(entity),
+    );
+    return result.raw as Partial<DomainTopic>;
   }
   // Todo refactor this to be like the others
   private toDomainTopic(topic: Topic): DomainTopic {

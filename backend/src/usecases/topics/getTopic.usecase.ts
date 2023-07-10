@@ -1,5 +1,5 @@
 import { UUID } from 'typeorm/driver/mongodb/bson.typings';
-import { TopicRepository } from '../../domain/repository/topic.type';
+import { TopicRepository } from '../../domain/repositories/topic.interface';
 import { DomainTopic } from '../../domain/entities/topic.model';
 import { ILoggerInterface } from '../../domain/loggers/logger.interface';
 

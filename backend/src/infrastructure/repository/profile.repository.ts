@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ProfileRepository } from '../../domain/repository/profile.type';
+import { ProfileRepository } from '../../domain/repositories/profile.interface';
 import { Profile as ServiceProfile } from '../entities/profile.entity';
 import { DomainProfile } from '../../domain/entities/profile.model';
 
@@ -33,16 +33,24 @@ export class DatabaseProfileRepository implements ProfileRepository {
     return this.toDomainProfile(profile);
   }
 
-  async insert(profile: DomainProfile): Promise<void> {
-    await this.profileEntityRepository.insert(this.toServiceProfile(profile));
+  async insert(profile: DomainProfile): Promise<Partial<DomainProfile>> {
+    const result = await this.profileEntityRepository.insert(
+      this.toServiceProfile(profile),
+    );
+    return result.raw as Partial<DomainProfile>;
   }
 
-  async update(id: string, updateObj: Partial<DomainProfile>): Promise<void> {
-    await this.profileEntityRepository.update(id, updateObj);
+  async update(
+    id: string,
+    updateObj: Partial<DomainProfile>,
+  ): Promise<Partial<DomainProfile>> {
+    const result = await this.profileEntityRepository.update(id, updateObj);
+    return result.raw as Partial<DomainProfile>;
   }
 
-  async delete(id: string): Promise<void> {
-    await this.profileEntityRepository.delete(id);
+  async delete(id: string): Promise<Partial<DomainProfile>> {
+    const result = await this.profileEntityRepository.delete(id);
+    return result.raw as Partial<DomainProfile>;
   }
 
   private toDomainProfile(profile: ServiceProfile): DomainProfile {

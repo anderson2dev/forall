@@ -34,4 +34,8 @@ export class User extends DomainUser {
   updatedAt: Date;
   @Column('boolean')
   enabled: boolean;
+  @Column()
+  lastLogin: Date;
+  @Column()
+  hashRefreshToken: string;
 }

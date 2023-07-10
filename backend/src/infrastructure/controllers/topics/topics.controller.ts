@@ -66,6 +66,7 @@ export class TopicsController {
 
   @Post()
   @ApiResponseType(TopicPresenter, true)
+  // TODO: change this to use jwt token as author
   async createTopic(@Body() createTopicDTO: CreateTopicDTO) {
     await this.createTopicUseCase.getInstance().execute(createTopicDTO);
     return new TopicPresenter({

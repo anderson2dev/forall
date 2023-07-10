@@ -1,16 +1,16 @@
 import { DomainTopic } from '../../domain/entities/topic.model';
 import { DomainUser } from '../../domain/entities/user.model';
-import { TopicRepository } from '../../domain/repository/topic.type';
-import { UserRepository } from '../../domain/repository/user.type';
+import { TopicRepository } from '../../domain/repositories/topic.interface';
+import { UserRepository } from '../../domain/repositories/user.interface';
 import { CreateTopicDTO } from '../../infrastructure/controllers/topics/topics.dto';
-import { UserExceptionsService } from '../../infrastructure/commons/exceptions/userExceptions.service';
+import { ExceptionsService } from '../../infrastructure/commons/exceptions/exceptions.service';
 import { LoggerService } from '../../infrastructure/logger/logger.service';
 
 export class CreateTopicUseCase {
   constructor(
     private readonly topicRepository: TopicRepository,
     private readonly userRepository: UserRepository,
-    private readonly userExceptionService: UserExceptionsService,
+    private readonly exceptionService: ExceptionsService,
     private readonly logger: LoggerService,
   ) {}
   async execute(generatedTopic: CreateTopicDTO) {
@@ -21,7 +21,7 @@ export class CreateTopicUseCase {
       generatedTopic.author,
     );
     if (!foundAuthor) {
-      return this.userExceptionService.userNotFountException({
+      return this.exceptionService.NotFoundException({
         message: 'User not found',
         code_error: 404,
       });
