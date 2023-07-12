@@ -13,8 +13,8 @@ return [
     'new_updated' => 'Tópico novo e atualizado',
     'newest' => 'Novos tópicos',
     'none_found' => 'Nenhum tópico encontrado',
-    'perma_delete' => 'Permanently delete thread|Permanently delete threads',
-    'perma_deleted' => 'Tópico permanentemente deletado|Tópicos permanentementes deletados',
+    'perma_delete' => 'Excluir permanentemente tópico|Excluir permanentemente tópicos',
+    'perma_deleted' => 'Tópico permanentemente excluídos|Tópicos permanentementes excluídos',
     'pin' => 'Destaque',
     'pinned' => 'Destacado',
     'post_the_first' => 'Seja o primeiro a postar!',
@@ -24,5 +24,7 @@ return [
     'unlock' => 'Destravar',
     'unpin' => 'Remover do destaque',
     'view' => 'Ver tópico',
+    'recent' => 'Tópicos Recentes',
+    "unread_updated" => "Não Lidas"
 
 ];

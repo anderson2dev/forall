@@ -43,7 +43,7 @@
     <nav class="v-navbar bg-white shadow py-4">
         <div class="container mx-auto px-4 md:flex md:items-center md:gap-4">
             <div class="flex justify-between items-center">
-                <a class="text-lg" href="{{ url(config('forum.web.router.prefix')) }}">Laravel Forum</a>
+                <a class="text-xl font-bold" href="{{ url(config('forum.web.router.prefix')) }}">{{ config('app.name') }}</a>
                 <button class="navbar-toggler block md:hidden border rounded-md px-2 py-1" type="button" :class="{ collapsed: isCollapsed }" @click="isCollapsed = ! isCollapsed">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="navbar-toggler-icon w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -81,7 +81,7 @@
                             </a>
                             <div class="border absolute left-0 bg-white rounded-md w-44 divide-y" :class="{ hidden: isUserDropdownCollapsed }" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="block px-4 py-2" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Log out
+                                    {{ __('Log Out') }}
                                 </a>
                                 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                     @csrf
@@ -90,10 +90,10 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/login') }}">Log in</a>
+                            <a class="nav-link" href="{{ url('/login') }}">{{ __('Log in') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/register') }}">Register</a>
+                            <a class="nav-link" href="{{ url('/register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
                 </ul>

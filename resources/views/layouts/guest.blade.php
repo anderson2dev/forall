@@ -16,14 +16,22 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            <div class="text-center">
+
+                <a class="text-3xl font-bold" href="/">
+                    <span >{{ config("app.name") }}</span>
                 </a>
+                <span class="block">Forum para todos.</span>
+
             </div>
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
+            </div>
+            <div class="mt-4">
+                <x-application-logo />
+
+                <span class="mt-4 text-sm">UFBA - 2023</span>
             </div>
         </div>
     </body>

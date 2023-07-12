@@ -2,10 +2,10 @@
 
 return [
 
-    'access_controlled_by_private_ancestor' => 'The ancestor category :category is set as private and controls access to this category.',
+    'access_controlled_by_private_ancestor' => 'A categoria pai :category está como privado e controla os acessos desta categoria.',
     'actions' => 'Ações de categoria',
     'category' => 'Categoria|Categorias',
-    'confirm_nonempty_delete' => 'Yes, I want to permanently delete this category and everything inside it',
+    'confirm_nonempty_delete' => 'Sim, Eu quero excluir permanentemente essa categoría e as postagens inclusas.',
     'create' => 'Criar categoria',
     'created' => 'Categoria criada',
     'deleted' => 'Categoria deletada|Categorias deletadas',
